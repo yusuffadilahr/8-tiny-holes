@@ -4,6 +4,7 @@ import createFilter from "redux-persist-transform-filter";
 import storage from 'redux-persist/lib/storage'
 import authReducer from './slice/authSlice'
 import { persistStore } from "redux-persist";
+// import cartReducer from './slice/cartSlice'
 
 const filteredState = createFilter(
     'user', ['token']
@@ -12,7 +13,7 @@ const filteredState = createFilter(
 const persistConfig = {
     key: 'token',
     storage,
-    transforms: [filteredState] /* *Harus pake s jangan lupa jadi transformsssssssssssssssss */
+    transforms: [filteredState]
 }
 
 const persistedReducer: any = persistReducer(persistConfig, authReducer)

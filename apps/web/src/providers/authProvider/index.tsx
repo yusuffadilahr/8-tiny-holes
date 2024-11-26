@@ -18,8 +18,11 @@ export default function AuthProviders({ children }: { children: ReactNode }) {
             dispatch(keepAuth({
                 email: res?.data?.data?.email,
                 role: res?.data?.data?.role,
-                name: res?.data?.data?.name
+                name: res?.data?.data?.name,
+                cart:  res?.data?.data?.cart
             }))
+
+            // console.log(res, '<<<<< dataapasih')
 
         } catch (error) {
             console.log(error)
@@ -27,10 +30,10 @@ export default function AuthProviders({ children }: { children: ReactNode }) {
     }
 
     useEffect(() => {
-        if (token) {
+        if (token.token) {
            displayDataUser()
         }
-    }, [token])
+    }, [token.token])
     
     return (
         <>

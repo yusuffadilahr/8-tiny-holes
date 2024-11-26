@@ -27,10 +27,10 @@ async function main() {
       description: 'A reusable and eco-friendly water bottle, perfect for staying hydrated on the go. Made from BPA-free materials.',
       stock: 150,
       price: 100,
-      category: 'Drinkware',
+      category: 'T-shirt',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
-        { imageUrl: 'https://example.com/images/product1.jpg' }
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resizecopyqunnov24-01_600x.jpg?v=1731066010' }
       ]
     },
     {
@@ -38,10 +38,10 @@ async function main() {
       description: 'Energy-efficient smart LED light bulb compatible with Alexa and Google Home. Change colors and control brightness remotely.',
       stock: 200,
       price: 100,
-      category: 'Electronics',
+      category: 'T-shirt',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
-        { imageUrl: 'https://example.com/images/product2.jpg' }
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE1-25_600x.jpg?v=1730808669' }
       ]
     },
     {
@@ -49,10 +49,10 @@ async function main() {
       description: 'Handcrafted lavender soap made with all-natural ingredients. Ideal for sensitive skin and relaxation.',
       stock: 100,
       price: 100,
-      category: 'Beauty & Personal Care',
+      category: 'T-shirt',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
-        { imageUrl: 'https://example.com/images/product3.jpg' }
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE3-01_600x.jpg?v=1730808848' }
       ]
     },
     {
@@ -60,10 +60,10 @@ async function main() {
       description: 'A luxurious 4-piece cotton bedding set designed for comfort and durability. Available in queen and king sizes.',
       stock: 50,
       price: 100,
-      category: 'Home & Living',
+      category: 'T-shirt',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
-        { imageUrl: 'https://example.com/images/product4.jpg' }
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-07_f9241227-96e1-475e-99b3-9b165a3ebfe2_600x.jpg?v=1730112677' }
       ]
     },
     {
@@ -71,10 +71,175 @@ async function main() {
       description: 'High-quality wireless earbuds with noise-canceling technology and a 12-hour battery life. Perfect for music and calls.',
       stock: 120,
       price: 100,
-      category: 'Electronics',
+      category: 'T-shirt',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
-        { imageUrl: 'https://example.com/images/product5.jpg' }
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-09_bb1e74f2-29e3-4399-b361-464c77980655_600x.jpg?v=1730112693' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - MURDERER',
+      description: 'A reusable and eco-friendly water bottle, perfect for staying hydrated on the go. Made from BPA-free materials.',
+      stock: 150,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resizecopyqunnov24-01_600x.jpg?v=1731066010' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - KRAKEN',
+      description: 'Energy-efficient smart LED light bulb compatible with Alexa and Google Home. Change colors and control brightness remotely.',
+      stock: 200,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE1-25_600x.jpg?v=1730808669' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - LOGO IMPACT',
+      description: 'Handcrafted lavender soap made with all-natural ingredients. Ideal for sensitive skin and relaxation.',
+      stock: 100,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE3-01_600x.jpg?v=1730808848' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - AFTER BREAK',
+      description: 'A luxurious 4-piece cotton bedding set designed for comfort and durability. Available in queen and king sizes.',
+      stock: 50,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-07_f9241227-96e1-475e-99b3-9b165a3ebfe2_600x.jpg?v=1730112677' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - MURDERER',
+      description: 'High-quality wireless earbuds with noise-canceling technology and a 12-hour battery life. Perfect for music and calls.',
+      stock: 120,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-09_bb1e74f2-29e3-4399-b361-464c77980655_600x.jpg?v=1730112693' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - MURDERER',
+      description: 'A reusable and eco-friendly water bottle, perfect for staying hydrated on the go. Made from BPA-free materials.',
+      stock: 150,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resizecopyqunnov24-01_600x.jpg?v=1731066010' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - KRAKEN',
+      description: 'Energy-efficient smart LED light bulb compatible with Alexa and Google Home. Change colors and control brightness remotely.',
+      stock: 200,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE1-25_600x.jpg?v=1730808669' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - LOGO IMPACT',
+      description: 'Handcrafted lavender soap made with all-natural ingredients. Ideal for sensitive skin and relaxation.',
+      stock: 100,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE3-01_600x.jpg?v=1730808848' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - AFTER BREAK',
+      description: 'A luxurious 4-piece cotton bedding set designed for comfort and durability. Available in queen and king sizes.',
+      stock: 50,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-07_f9241227-96e1-475e-99b3-9b165a3ebfe2_600x.jpg?v=1730112677' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - MURDERER',
+      description: 'High-quality wireless earbuds with noise-canceling technology and a 12-hour battery life. Perfect for music and calls.',
+      stock: 120,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-09_bb1e74f2-29e3-4399-b361-464c77980655_600x.jpg?v=1730112693' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - MURDERER',
+      description: 'A reusable and eco-friendly water bottle, perfect for staying hydrated on the go. Made from BPA-free materials.',
+      stock: 150,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resizecopyqunnov24-01_600x.jpg?v=1731066010' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - KRAKEN',
+      description: 'Energy-efficient smart LED light bulb compatible with Alexa and Google Home. Change colors and control brightness remotely.',
+      stock: 200,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE1-25_600x.jpg?v=1730808669' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - LOGO IMPACT',
+      description: 'Handcrafted lavender soap made with all-natural ingredients. Ideal for sensitive skin and relaxation.',
+      stock: 100,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/ORBISBURURESIZE3-01_600x.jpg?v=1730808848' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - AFTER BREAK',
+      description: 'A luxurious 4-piece cotton bedding set designed for comfort and durability. Available in queen and king sizes.',
+      stock: 50,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-07_f9241227-96e1-475e-99b3-9b165a3ebfe2_600x.jpg?v=1730112677' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - MURDERER',
+      description: 'High-quality wireless earbuds with noise-canceling technology and a 12-hour battery life. Perfect for music and calls.',
+      stock: 120,
+      price: 100,
+      category: 'T-shirt',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-09_bb1e74f2-29e3-4399-b361-464c77980655_600x.jpg?v=1730112693' }
       ]
     }
   ];

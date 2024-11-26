@@ -24,6 +24,8 @@ model User {
   forgotPasswordToken String?  @db.Text
   verifyEmailCode     String
 
+  cartProduct CartProduct[]
+
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   deletedAt DateTime?
@@ -46,6 +48,7 @@ model Product {
 
   productImage ProductImage[]
   sizeChart    SizeChart[]
+  cartProduct  CartProduct[]
 
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -74,4 +77,21 @@ model ProductImage {
   deletedAt DateTime?
 
   @@map("productImage")
+}
+
+model CartProduct {
+  id        Int     @id @default(autoincrement())
+  productId String
+  Product   Product @relation(fields: [productId], references: [id])
+  User      User?   @relation(fields: [userId], references: [id])
+  userId    String?
+  size      String
+  qty       Int
+  price     Int
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("cartProduct")
 }

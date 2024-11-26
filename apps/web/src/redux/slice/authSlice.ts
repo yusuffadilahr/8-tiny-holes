@@ -7,7 +7,8 @@ const authSlice = createSlice({
             token: '',
             role: '',
             name: '',
-            email: ''
+            email: '',
+            cart: null,
         }
     },
     reducers: {
@@ -15,15 +16,13 @@ const authSlice = createSlice({
             state.user.token = action.payload.token
         },
         resetTokenLogout: (state, action) => {
-            state.user.token = ''
-            state.user.email = ''
-            state.user.role = ''
-            state.user.name = ''
+            state.user = action.payload
         },
         keepAuth: (state, action) => {
             state.user.email = action.payload.email
             state.user.role = action.payload.role
             state.user.name = action.payload.name
+            state.user.cart = action.payload.cart
         }
     }
 })
