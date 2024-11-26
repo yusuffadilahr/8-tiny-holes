@@ -7,7 +7,6 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
         const imagesUpload: any = req?.files
         const { productName, description, stock, price, category, size /* size --> * Lempar dari frontend bentuk array ["S", "M", "L"]*/ } = req.body
 
-        console.log(req.body, "<< cek dari controlller")
         const findProducts = await prisma.product.findFirst({
             where: { productName }
         })
@@ -60,6 +59,92 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
             message: 'Berhasil membuat data product',
             data: {}
         })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getDataProducts = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const findProducts = await prisma.product.findMany({
+            include: {
+                productImage: true
+            }
+        })
+
+        res.status(200).json({
+            error: false,
+            message: 'Berhasil mengambil data product',
+            data: findProducts
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getDataProductsById = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params
+
+        const findProductsById = await prisma.product.findFirst({
+            where: { id },
+            include: {
+                productImage: true,
+                sizeChart: true
+            }
+        })
+
+        res.status(200).json({
+            error: false,
+            message: 'Berhasil mengambil data',
+            data: findProductsById
+        })
+
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const addCartProduct = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { userId, qty, price, productId, size } = req.body
+
+        const findCart = await prisma.cartProduct.findFirst({
+            where: {
+                userId: userId,
+                productId,
+                size
+            }
+        })
+
+        if (findCart) {
+            const updatedQuantity = findCart?.qty + Number(qty)
+            const priceUpdate = price * updatedQuantity
+
+            await prisma.cartProduct.update({
+                data: { qty: Number(updatedQuantity), price: Number(priceUpdate), },
+                where: { id: Number(findCart?.id), userId: userId }
+            })
+            
+        } else {
+            await prisma.cartProduct.create({
+                data: {
+                    userId,
+                    qty: Number(qty),
+                    price: Number(price),
+                    productId,
+                    size
+                }
+            })
+        }
+
+        res.status(201).json({
+            error: false,
+            message: 'Berhasil menambahkan product',
+            data: {}
+        })
+
 
     } catch (error) {
         next(error)

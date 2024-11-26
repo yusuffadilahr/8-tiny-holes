@@ -35,5 +35,5 @@ app.use((err: IError, req: Request, res: Response, next: NextFunction) => {
 dbConnect()
 
 app.listen(port, () => {
-    console.log('On PORT 5000')
+    console.log(`On PORT ${port}`)
 })

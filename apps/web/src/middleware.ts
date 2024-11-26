@@ -16,9 +16,14 @@ export const middleware = (req: NextRequest, res: NextResponse) => {
         return NextResponse.redirect(new URL('/', req.url))
     }
 
+    console.log(role, '<<<<<<')
+    if (role != 'ADMIN' && tokenUser && pathname.startsWith('/dashboard')) {
+        return NextResponse.redirect(new URL('/', req.url))
+    }
+
     return NextResponse.next()
 }
 
 export const config = {
-    matcher: ['/login', '/register'],
+    matcher: ['/login', '/register', '/dashboard'],
 };

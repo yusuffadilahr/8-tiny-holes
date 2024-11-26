@@ -2,7 +2,7 @@ import { uploadMulter } from "@/utils/multer";
 import { NextFunction, Request, Response } from "express";
 
 export const uploader = (req: Request, res: Response, next: NextFunction) => {
-    const uploads = uploadMulter.fields([{ name: 'images', maxCount: 3 }])
+    const uploads = uploadMulter.fields([{ name: 'images', maxCount: 2 }])
     const { userId, authorizationRole } = req.body
 
     console.log(userId, '< dari uploader')

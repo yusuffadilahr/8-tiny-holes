@@ -125,7 +125,30 @@ export const keepAuthUser = async (req: Request, res: Response, next: NextFuncti
         const findUser = await prisma.user.findFirst({
             where: {
                 id: userId
+            },
+            include: {
+                cartProduct: {
+                    include: {
+                        Product: {
+                            include: {
+                                productImage: true
+                            }
+                        }
+                    }
+                }
             }
+        })
+
+        const dataCart = findUser?.cartProduct.flatMap((item) => {
+            return item?.Product?.productImage.map((itm) => ({
+                id: item?.id,
+                price: item?.price,
+                productId: item?.productId,
+                qty: item?.qty,
+                size: item?.size,
+                imageUrl: itm?.imageUrl,
+                productName: item?.Product?.productName
+            }))
         })
 
         if (!findUser) throw { msg: 'Data tidak tersedia, atau user belum terdaftar', status: 406 }
@@ -136,7 +159,8 @@ export const keepAuthUser = async (req: Request, res: Response, next: NextFuncti
             data: {
                 role: findUser?.role,
                 name: findUser?.name,
-                email: findUser?.email
+                email: findUser?.email,
+                cart: dataCart,
             }
         })
     } catch (error) {
