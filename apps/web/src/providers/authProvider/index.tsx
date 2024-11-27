@@ -1,11 +1,13 @@
 'use client'
-import { keepAuth } from "@/redux/slice/authSlice";
+import { keepAuth, updateCart } from "@/redux/slice/authSlice";
 import { instance } from "@/utils/axios.instance";
 import { ReactNode, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function AuthProviders({ children }: { children: ReactNode }) {
     const token = useSelector((state: any) => state.auth.user)
+    const updatedCart = useSelector((state: any) => state?.auth?.user?.cartUpdate)
+
     const dispatch = useDispatch()
     const displayDataUser = async () => {
         try {
@@ -19,10 +21,10 @@ export default function AuthProviders({ children }: { children: ReactNode }) {
                 email: res?.data?.data?.email,
                 role: res?.data?.data?.role,
                 name: res?.data?.data?.name,
-                cart:  res?.data?.data?.cart
+                cart: res?.data?.data?.cart
             }))
 
-            // console.log(res, '<<<<< dataapasih')
+            dispatch(updateCart(false))
 
         } catch (error) {
             console.log(error)
@@ -31,10 +33,16 @@ export default function AuthProviders({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         if (token.token) {
-           displayDataUser()
+            displayDataUser()
         }
     }, [token.token])
-    
+
+    useEffect(()=> {
+        if(updatedCart == true) {
+            displayDataUser()
+        }
+    }, [updatedCart])
+
     return (
         <>
             {children}
