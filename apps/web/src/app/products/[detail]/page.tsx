@@ -1,4 +1,5 @@
 'use client'
+import { updateCart } from "@/redux/slice/authSlice";
 // import { setAddToCart } from "@/redux/slice/cartSlice";
 import { instance } from "@/utils/axios.instance";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -9,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function Page({ params }: any) {
     const [getSize, setGetSize] = useState('')
+    const dispatch = useDispatch()
     const token = useSelector((state: any) => state.auth.user.token)
     console.log(token)
     const { detail } = params
@@ -39,7 +41,7 @@ export default function Page({ params }: any) {
         },
         onSuccess: (res) => {
             toast.success(res?.data?.message)
-            window.location.href = '/cart'
+            dispatch(updateCart(true))
             console.log(res)
         },
         onError: (err: any) => {

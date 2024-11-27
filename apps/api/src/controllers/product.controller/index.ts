@@ -126,7 +126,7 @@ export const addCartProduct = async (req: Request, res: Response, next: NextFunc
                 data: { qty: Number(updatedQuantity), price: Number(priceUpdate), },
                 where: { id: Number(findCart?.id), userId: userId }
             })
-            
+
         } else {
             await prisma.cartProduct.create({
                 data: {
@@ -146,6 +146,29 @@ export const addCartProduct = async (req: Request, res: Response, next: NextFunc
         })
 
 
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const deleteDataCart = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { userId } = req.body
+        const { id } = req.params
+
+        const findCart = await prisma.cartProduct.findFirst({
+            where: { id: Number(id), userId }
+        })
+
+        if (!findCart) throw { msg: 'Data tidak ada atau sudah terhapus!', status: 404 }
+
+        await prisma.cartProduct.delete({ where: { id: Number(id), userId } })
+
+        res.status(200).json({
+            error: false,
+            message: 'Berhasil menghapus dari keranjang',
+            data: {}
+        })
     } catch (error) {
         next(error)
     }
