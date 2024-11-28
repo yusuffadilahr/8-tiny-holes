@@ -73,11 +73,15 @@ export const getDataProducts = async (req: Request, res: Response, next: NextFun
             }
         })
 
+        const filteredProducts = findProducts?.filter((item: any) => item?.stock >= 1)
+        const sortProduct = filteredProducts?.sort((a: any, b:any)=> a?.createdAt - b?.createdAt)
+
         res.status(200).json({
             error: false,
             message: 'Berhasil mengambil data product',
-            data: findProducts
+            data: sortProduct
         })
+
     } catch (error) {
         next(error)
     }

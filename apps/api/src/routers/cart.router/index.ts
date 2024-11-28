@@ -5,6 +5,6 @@ import { Router } from "express";
 
 const cartRouter = Router()
 cartRouter.get('/', tokenValidation, getProductCart)
-cartRouter.patch('/', tokenValidation, updateCart)
+cartRouter.patch('/', tokenValidation, limiter, updateCart)
 
 export default cartRouter

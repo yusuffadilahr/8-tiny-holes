@@ -34,8 +34,8 @@ export const useLoginHooks = () => {
 
             Cookies.set('_toksis', res?.data?.data?.token, { expires: 1 })
             Cookies.set('_roled', roleUser, { expires: 1 })
-            
-            res?.data?.data?.role != 'ADMIN' ? router.push('/') : router.push('/dashboard')
+
+            res?.data?.data?.role != 'ADMIN' ? window.location.href = '/' : window.location.href = '/dashboard'
         },
         onError: (err: any) => {
             toast.error(err?.response?.data?.message)

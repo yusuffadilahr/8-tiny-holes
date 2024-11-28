@@ -1,103 +1,11 @@
 'use client'
 
-import { updateCart } from "@/redux/slice/authSlice";
-// import { updateCart } from "@/redux/slice/authSlice";
-import { instance } from "@/utils/axios.instance";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useCartHooks } from "@/features/cart/hooks";
 import Image from "next/image";
-import toast from "react-hot-toast";
 import { FaTrash } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
 
 export default function Page() {
-    const token = useSelector((state: any) => state?.auth?.user?.token)
-    const dispatch = useDispatch()
-    const { data: getCart, refetch } = useQuery({
-        queryKey: ['get-data'],
-        queryFn: async () => {
-            const res = await instance.get('/cart', {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            console.log(res)
-            return res?.data?.data
-        }
-    })
-    const { mutate: handleDelete } = useMutation({
-        mutationFn: async (id) => {
-            const result = await Swal.fire({
-                title: "Apakah anda yakin ingin menghapus?",
-                text: "Produk akan dihapus dari keranjang anda.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Konfirmasi",
-                cancelButtonText: "Batal"
-            });
-
-            if (result?.isConfirmed) {
-                return await instance.delete(`/product/detail/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
-            }
-        },
-        onSuccess: (res) => {
-            if (res) {
-                toast.success(res?.data?.message)
-                refetch()
-                dispatch(updateCart(true))
-            }
-        },
-        onError: (err: any) => {
-            toast.error(err?.response?.data?.message)
-        }
-    })
-
-    const { mutate: handleIncrementData } = useMutation({
-        mutationFn: async (id: number) => {
-            return await instance.patch('/cart', {
-                incrementId: Number(id)
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-        },
-        onSuccess: (res) => {
-            refetch()
-            console.log(res)
-        },
-        onError: (err) => {
-            console.log(err)
-        }
-    })
-
-    const { mutate: handleDecrementData } = useMutation({
-        mutationFn: async (id: number) => {
-            return await instance.patch('/cart', {
-                decrementId: Number(id)
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-        },
-        onSuccess: (res) => {
-            refetch()
-            console.log(res)
-        },
-        onError: (err) => {
-            console.log(err)
-        }
-    })
-
-    const totalPrice = getCart?.reduce((acc: any, item: any) => acc + item?.price, 0)
-    const totalQuantity = getCart?.reduce((acc: any, item: any) => acc + item?.qty, 0)
+    const { getCart, handleDelete, handleIncrementData, handleDecrementData, totalPrice, totalQuantity } = useCartHooks()
 
     return (
         <main className={`w-full ${getCart?.length > 1 ? 'h-fit' : 'lg:h-[80vh]'} py-5 flex bg-black gap-2 px-2`}>
@@ -124,9 +32,9 @@ export default function Page() {
                         </div>
                         <div className="flex flex-col items-center">
                             <div className="flex w-full gap-4 justify-end items-center">
-                                <button disabled={item?.qty == 1 ? true : false} onClick={() => handleDecrementData(item?.id)} className="border px-2 py-1">-</button>
+                                <button disabled={item?.qty == 1 ? true : false} onClick={() => handleDecrementData(item?.id)} className="border px-2 py-1 disabled:bg-neutral-300">-</button>
                                 <span>{item?.qty}</span>
-                                <button onClick={() => handleIncrementData(item?.id)} className="border px-2 py-1">+</button>
+                                <button disabled={item?.qty >= item?.stock ? true : false} onClick={() => handleIncrementData(item?.id)} className="border px-2 py-1 disabled:bg-neutral-300">+</button>
                                 <button onClick={() => handleDelete(item?.id)}>
                                     <FaTrash />
                                 </button>

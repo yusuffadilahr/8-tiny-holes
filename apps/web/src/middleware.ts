@@ -16,14 +16,17 @@ export const middleware = (req: NextRequest, res: NextResponse) => {
         return NextResponse.redirect(new URL('/', req.url))
     }
 
-    console.log(role, '<<<<<<')
     if (role != 'ADMIN' && tokenUser && pathname.startsWith('/dashboard')) {
         return NextResponse.redirect(new URL('/', req.url))
+    }
+
+    if (!tokenUser && !roleUser && pathname.startsWith('/cart')) {
+        return NextResponse.redirect(new URL('/login',  req.url))
     }
 
     return NextResponse.next()
 }
 
 export const config = {
-    matcher: ['/login', '/register', '/dashboard'],
+    matcher: ['/login', '/register', '/dashboard', '/cart'],
 };

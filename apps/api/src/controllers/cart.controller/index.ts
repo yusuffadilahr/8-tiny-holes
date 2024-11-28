@@ -1,6 +1,5 @@
 import prisma from "@/connection";
 import { NextFunction, Request, Response } from "express";
-import { idText } from "typescript";
 
 export const getProductCart = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -30,17 +29,21 @@ export const getProductCart = async (req: Request, res: Response, next: NextFunc
                 productId: item?.productId,
                 qty: item?.qty,
                 size: item?.size,
+                stock: item.Product.stock,
                 imageUrl: itm?.imageUrl,
-                productName: item?.Product?.productName
+                productName: item?.Product?.productName,
+                createdAt: item?.createdAt
             }))
         })
+
+        const sortDataProduct = dataCart?.sort((a: any, b: any) => a?.createdAt - b?.createdAt)
 
         if (!findUser) throw { msg: 'Data tidak tersedia, atau user belum terdaftar', status: 406 }
 
         res.status(200).json({
             error: false,
             message: 'Data berhasil diambil',
-            data: dataCart
+            data: sortDataProduct
         })
     } catch (error) {
         next(error)
@@ -64,7 +67,7 @@ export const updateCart = async (req: Request, res: Response, next: NextFunction
             where: {
                 AND: [
                     { userId },
-                    { id: incrementId }
+                    { id: decrementId }
                 ]
             }
         })
