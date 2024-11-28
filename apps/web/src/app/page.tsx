@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import styles from './page.module.css'
 import { useSelector } from 'react-redux'
+import Link from 'next/link'
 
 export default function Home() {
   const data = useSelector((state: any) => state?.auth.user)
@@ -37,7 +38,7 @@ export default function Home() {
         </div>
       </section>
       <section className='bg-black w-full h-fit py-3'>
-        <div className='w-full h-fit md:h-[80vh] gap-2 space-y-5 md:space-y-0 p-4 md:flex'>
+        <div className='w-full h-fit md:h-[80vh] flex flex-col md:flex-row gap-2 p-4 md:flex'>
           <div className='w-full md:w-8/12 h-full flex items-center'>
             <div className='w-full flex justify-center h-fit'>
               <div className='grid grid-cols-2 w-full gap-1'>
@@ -55,13 +56,26 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className='w-full h-full flex flex-col items-center gap-5 px-10 py-5 rounded-xl bg-neutral-900'>
-            <h1 className='text-white text-xl'>L O G O - I M P A C T</h1>
-            {/* <video autoPlay loop playsInline muted>
-              <source src='/videos/logo-impact.mp4' type='video/mp4' />
-            </video> */}
-          </div>
+          <Link href='/products' className='w-full h-full hover:opacity-75'>
+            <div className='w-full h-full relative flex flex-col items-center gap-5 rounded-xl md:py-2 py-0'>
+              <Image
+                className='w-full h-full object-cover rounded-xl'
+                src='/images/impa.jpeg'
+                width={800}
+                height={800}
+                alt='imp'
+              />
+              <div className='absolute top-20'>
+                <h1 className='text-white text-7xl'>LOGO IMPACT</h1>
+              </div>
+            </div>
+          </Link>
         </div>
+      </section>
+      <section className='w-full bg-black h-fit flex justify-center px-4'>
+        <video autoPlay loop playsInline muted className='w-full rounded-xl'>
+          <source src='/videos/rens.mp4' type='video/mp4' />
+        </video>
       </section>
     </main>
   )

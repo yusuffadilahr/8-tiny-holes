@@ -2,14 +2,14 @@ import Image from "next/image";
 
 export default function CardProduct({ itemName, imageUrl, itemCategory, itemPrice }: any) {
     return (
-        <div className="h-fit w-full bg-white border transition-all duration-75 hover:scale-105">
-            <div className="w-full h-52">
+        <div className="h-fit w-full transition-all duration-75 hover:scale-105">
+            <div className="w-full md:h-[204px] lg:h-[340px] flex items-center justify-center">
                 <Image
                     width={500}
                     height={500}
                     alt="product"
                     src={imageUrl}
-                    className="h-52 object-cover w-full"
+                    className="md:w-full md:h-[204px] lg:h-[340px] lg:w-full object-cover"
                 />
             </div>
             <div className="text-black flex flex-col items-center py-2">
