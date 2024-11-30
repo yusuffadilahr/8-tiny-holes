@@ -139,16 +139,16 @@ export const keepAuthUser = async (req: Request, res: Response, next: NextFuncti
             }
         })
 
-        const dataCart = findUser?.cartProduct.flatMap((item) => {
-            return item?.Product?.productImage.map((itm) => ({
+        const dataCart = findUser?.cartProduct.map((item) => {
+            return {
                 id: item?.id,
                 price: item?.price,
                 productId: item?.productId,
                 qty: item?.qty,
                 size: item?.size,
-                imageUrl: itm?.imageUrl,
+                imageUrl: item?.Product?.productImage[0]?.imageUrl,
                 productName: item?.Product?.productName
-            }))
+            }
         })
 
         if (!findUser) throw { msg: 'Data tidak tersedia, atau user belum terdaftar', status: 406 }

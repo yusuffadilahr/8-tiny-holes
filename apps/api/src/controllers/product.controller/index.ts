@@ -67,19 +67,59 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
 
 export const getDataProducts = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const findProducts = await prisma.product.findMany({
-            include: {
-                productImage: true
-            }
-        })
+        const { sorted, search, category } = req.query
+
+        let findProducts;
+        if (search) {
+            const searchValue = search.toString().trim()
+            findProducts = await prisma.product.findMany({
+                include: {
+                    productImage: true
+                },
+                where: {
+                    OR: [
+                        { productName: { contains: searchValue as string, mode: "insensitive" } },
+                        { category: { contains: searchValue as string, mode: "insensitive" } }
+                    ]
+                }
+            })
+
+        } else if (category) {
+            const categoryValue = category?.toString().trim()
+            findProducts = await prisma.product.findMany({
+                include: {
+                    productImage: true
+                },
+                where: { category: { contains: categoryValue as string, mode: "insensitive" } }
+            })
+
+        } else {
+            findProducts = await prisma.product.findMany({
+                include: {
+                    productImage: true
+                }
+            })
+        }
 
         const filteredProducts = findProducts?.filter((item: any) => item?.stock >= 1)
-        const sortProduct = filteredProducts?.sort((a: any, b:any)=> a?.createdAt - b?.createdAt)
+
+        let dataProducts;
+        if (sorted == 'sort_name_asc') {
+            dataProducts = filteredProducts?.sort((a: any, b: any) => a?.productName.toLowerCase().localeCompare(b?.productName.toLowerCase()))
+        } else if (sorted == 'sort_name_desc') {
+            dataProducts = filteredProducts?.sort((a: any, b: any) => b?.productName.toLowerCase().localeCompare(a?.productName.toLowerCase()))
+        } else if (sorted == 'sort_price_desc') {
+            dataProducts = filteredProducts?.sort((a: any, b: any) => b?.price - a?.price)
+        } else if (sorted == 'sort_price_asc') {
+            dataProducts = filteredProducts?.sort((a: any, b: any) => a?.price - b?.price)
+        } else {
+            dataProducts = filteredProducts?.sort((a: any, b: any) => a?.createdAt - b?.createdAt)
+        }
 
         res.status(200).json({
             error: false,
             message: 'Berhasil mengambil data product',
-            data: sortProduct
+            data: dataProducts
         })
 
     } catch (error) {
@@ -173,6 +213,29 @@ export const deleteDataCart = async (req: Request, res: Response, next: NextFunc
             message: 'Berhasil menghapus dari keranjang',
             data: {}
         })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const productNewest = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const findProducts = await prisma.product.findMany({
+            take: 4,
+            orderBy: {
+                createdAt: 'desc'
+            },
+            include: {
+                productImage: true
+            }
+        })
+
+        res.status(200).json({
+            error: false,
+            message: 'Berhasil mendapatkan data product terbaru',
+            data: findProducts
+        })
+
     } catch (error) {
         next(error)
     }

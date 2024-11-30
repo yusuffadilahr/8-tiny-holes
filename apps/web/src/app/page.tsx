@@ -4,16 +4,27 @@ import Image from 'next/image'
 import styles from './page.module.css'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
+import CardProduct from '@/components/core/cardProduct'
+import { useQuery } from '@tanstack/react-query'
+import { instance } from '@/utils/axios.instance'
 
 export default function Home() {
   const data = useSelector((state: any) => state?.auth.user)
-  console.log(data, "<<< dari global state")
+
   const imageArr = [
     'https://res.cloudinary.com/dlprsc2zn/image/upload/v1732540931/IMG_0695_aifkup.jpg',
     'https://res.cloudinary.com/dlprsc2zn/image/upload/v1732540925/IMG_0540_kgy5jr.jpg',
     'https://res.cloudinary.com/dlprsc2zn/image/upload/v1732540924/IMG_0679_zu2aof.jpg',
     'https://res.cloudinary.com/dlprsc2zn/image/upload/v1732540921/IMG_0698_lisasz.jpg'
   ]
+
+  const { data: newestProducts } = useQuery({
+    queryKey: ['get-data-product'],
+    queryFn: async () => {
+      const res = await instance.get('/product/newest')
+      return res?.data?.data
+    }
+  })
 
   return (
     <main className='w-full h-fit'>
@@ -72,7 +83,24 @@ export default function Home() {
           </Link>
         </div>
       </section>
-      <section className='w-full bg-black h-fit flex justify-center px-4'>
+      <section className='w-full flex flex-col justify-center items-center h-fit px-4 bg-black'>
+        <div className='w-full flex flex-col justify-center items-center py-5 rounded-xl bg-white'>
+          <h1 className='z-10 font-bold'>N E W - R E L E A S E</h1>
+          <div className='grid grid-cols-2 lg:grid-cols-4 w-full overflow-hidden'>
+            {newestProducts?.map((item: any, i: any) => (
+              <Link href={`/products/${item?.id}-16320-${item?.productName.toLowerCase()}`} key={i}>
+                <CardProduct
+                  itemName={item?.productName}
+                  imageUrl={item?.productImage[0]?.imageUrl}
+                  itemCategory={item?.category}
+                  itemPrice={item?.price}
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className='w-full bg-black h-fit flex justify-center px-4 py-10'>
         <video autoPlay loop playsInline muted className='w-full rounded-xl'>
           <source src='/videos/rens.mp4' type='video/mp4' />
         </video>
