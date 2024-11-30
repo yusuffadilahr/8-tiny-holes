@@ -22,18 +22,18 @@ export const getProductCart = async (req: Request, res: Response, next: NextFunc
             }
         })
 
-        const dataCart = findUser?.cartProduct.flatMap((item) => {
-            return item?.Product?.productImage.map((itm) => ({
+        const dataCart = findUser?.cartProduct.map((item) => {
+            return {
                 id: item?.id,
                 price: item?.price,
                 productId: item?.productId,
                 qty: item?.qty,
                 size: item?.size,
                 stock: item.Product.stock,
-                imageUrl: itm?.imageUrl,
+                imageUrl: item?.Product?.productImage[0]?.imageUrl,
                 productName: item?.Product?.productName,
                 createdAt: item?.createdAt
-            }))
+            }
         })
 
         const sortDataProduct = dataCart?.sort((a: any, b: any) => a?.createdAt - b?.createdAt)

@@ -16,7 +16,7 @@ export default function CardProduct({ itemName, imageUrl, itemCategory, itemPric
                 <div className="text-xs">
                     <h1 className="text-neutral-500">{itemCategory}</h1>
                 </div>
-                <h1 className="text-sm">{itemName}</h1>
+                <h1 className="text-sm text-neutral-800 font-bold">{itemName}</h1>
                 <h1 className="text-sm">${itemPrice}</h1>
             </div>
         </div>
