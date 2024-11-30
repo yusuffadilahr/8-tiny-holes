@@ -9,7 +9,8 @@ const authSlice = createSlice({
             name: '',
             email: '',
             cart: null,
-            cartUpdate: false
+            cartUpdate: false,
+            profile: ''
         }
     },
     reducers: {
@@ -24,6 +25,7 @@ const authSlice = createSlice({
             state.user.role = action.payload.role
             state.user.name = action.payload.name
             state.user.cart = action.payload.cart
+            state.user.profile = action.payload.profile
         },
         updateCart: (state, action) => {
             state.user.cartUpdate = action.payload

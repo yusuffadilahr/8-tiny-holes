@@ -28,5 +28,5 @@ export const middleware = (req: NextRequest, res: NextResponse) => {
 }
 
 export const config = {
-    matcher: ['/login', '/register', '/dashboard', '/cart'],
+    matcher: ['/login', '/register', '/dashboard', '/cart']
 };

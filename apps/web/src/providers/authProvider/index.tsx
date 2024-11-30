@@ -21,7 +21,8 @@ export default function AuthProviders({ children }: { children: ReactNode }) {
                 email: res?.data?.data?.email,
                 role: res?.data?.data?.role,
                 name: res?.data?.data?.name,
-                cart: res?.data?.data?.cart
+                cart: res?.data?.data?.cart,
+                profile: res?.data?.data?.profile
             }))
 
             dispatch(updateCart(false))

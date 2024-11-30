@@ -27,15 +27,26 @@ export const useCartHooks = () => {
     const { mutate: handleDelete } = useMutation({
         mutationFn: async (id) => {
             const result = await Swal.fire({
-                title: "Apakah anda yakin ingin menghapus?",
-                text: "Produk akan dihapus dari keranjang anda.",
+                title: "Apakah Anda yakin?",
+                text: "Produk ini akan dihapus dari keranjang Anda.",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Konfirmasi",
-                cancelButtonText: "Batal"
+                confirmButtonText: "Ya, Hapus",
+                cancelButtonText: "Batal",
+                confirmButtonColor: "#DD6B55",  
+                cancelButtonColor: "#FF4081",   
+                background: "#f9f9f9",         
+                showClass: {
+                    popup: 'swal2-noanimation',
+                },
+                customClass: {
+                    popup: 'swal-popup',       
+                    title: 'swal-title',        
+                    confirmButton: 'swal-button-confirm',
+                    cancelButton: 'swal-button-cancel'     
+                }
             });
+            
 
             if (result?.isConfirmed) {
                 return await instance.delete(`/product/detail/${id}`, {

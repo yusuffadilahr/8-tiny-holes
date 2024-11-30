@@ -24,6 +24,10 @@ app.use('/3000', (req: Request, res: Response, next: NextFunction) => {
     res.send(`<h1>Welcome on Port ${port}</h1>`)
 })
 
+// app.locals.credentials = {
+//     token: null
+// }
+
 app.use((err: IError, req: Request, res: Response, next: NextFunction) => {
     res.status(err?.status || 500).json({
         error: false,

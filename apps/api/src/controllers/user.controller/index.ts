@@ -161,8 +161,39 @@ export const keepAuthUser = async (req: Request, res: Response, next: NextFuncti
                 name: findUser?.name,
                 email: findUser?.email,
                 cart: dataCart,
+                profile: findUser?.profilePicture
             }
         })
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const handleLogout = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { email } = req.body
+
+        const findUser = await prisma.user.findFirst({
+            where: { email }
+        })
+
+        if (!findUser) throw { msg: 'User tidak ada', status: 400 }
+
+        const { authorization } = req.headers
+        let token = authorization?.split(' ')[1] as string
+
+        jwt.verify(token, jwt_secret, (err) => {
+            if (err) throw { msg: 'Invalid token', status: 400 }
+
+            req.app.locals.credentials = null
+        })
+
+        res.status(200).json({
+            error: false,
+            message: 'Berhasil logout',
+            data: { email }
+        })
+
     } catch (error) {
         next(error)
     }

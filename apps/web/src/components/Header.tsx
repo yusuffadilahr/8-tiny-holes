@@ -2,6 +2,7 @@
 
 import { useProductsHooks } from "@/features/products/hooks";
 import { resetTokenLogout } from "@/redux/slice/authSlice";
+import { instance } from "@/utils/axios.instance";
 import Cookies from "js-cookie";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,7 @@ import Swal from "sweetalert2";
 export const Header = () => {
   const token = useSelector((state: any) => state?.auth?.user?.token)
   const cartUser = useSelector((state: any) => state?.auth?.user?.cart)
+  const emailUser = useSelector((state: any) => state?.auth?.user?.email)
   const [getCategory, setGetCategory] = useState(false)
   const [isMenuUser, setIsMenuUser] = useState(false)
   const { setCategorySearch } = useProductsHooks()
@@ -41,6 +43,13 @@ export const Header = () => {
           text: "Anda berhasil logout.",
           icon: "success"
         });
+        await instance.post('/auth/logout', {
+          email: emailUser
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
 
         Cookies.remove('_toksis');
         Cookies.remove('_roled');
@@ -77,7 +86,7 @@ export const Header = () => {
   }
 
   return (
-    <nav className='flex flex-col w-full h-fit bg-black'>
+    <nav className={`${pathname.startsWith('/dashboard') ? 'hidden' : 'flex'} flex-col w-full h-fit bg-black`}>
       <section className='w-full relative justify-between items-center flex h-20 bg-black'>
         {/* <Link href='/' className="text-white">8 T I N Y H O L E S</Link> */}
         <Link href='/' className="w-fit h-7 lg:h-9 px-5">

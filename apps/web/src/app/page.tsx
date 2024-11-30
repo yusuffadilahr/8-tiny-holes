@@ -76,9 +76,9 @@ export default function Home() {
                 height={800}
                 alt='imp'
               />
-              <div className='absolute top-20'>
+              {/* <div className='absolute top-20'>
                 <h1 className='text-white text-7xl'>LOGO IMPACT</h1>
-              </div>
+              </div> */}
             </div>
           </Link>
         </div>

@@ -5,6 +5,7 @@ export default function CardProduct({ itemName, imageUrl, itemCategory, itemPric
         <div className="h-fit w-full transition-all duration-75 hover:scale-105">
             <div className="w-full md:h-[204px] lg:h-[340px] flex items-center justify-center">
                 <Image
+                    loading="lazy"
                     width={500}
                     height={500}
                     alt="product"
