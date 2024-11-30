@@ -12,7 +12,6 @@ export const useProductsHooks = () => {
     const [inputSearch, setInputSearch] = useState(params.get('search') || '')
     const [categorySearch, setCategorySearch] = useState(params.get('category') || '')
 
-
     const router = useRouter()
     const pathname = usePathname()
 

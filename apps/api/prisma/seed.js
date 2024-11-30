@@ -7,8 +7,8 @@ const prisma = new PrismaClient();
 const salt = 10
 async function main() {
 
-  await prisma.user.create({
-    data: {
+  const userAccount = [
+    {
       name: 'Admin',
       email: 'admin@8th.com',
       password: await hash('admin', salt),
@@ -18,7 +18,22 @@ async function main() {
       phoneNumber: '088219238124',
       profilePicture: 'https://i.pinimg.com/1200x/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg',
       verifyEmailCode: 'admin-ganteng',
+    },
+    {
+      name: 'User',
+      email: 'user@8tinyholes.com',
+      password: await hash('123', salt),
+      isVerify: true,
+      address: 'Bogor',
+      role: 'USER',
+      phoneNumber: '088234238124',
+      profilePicture: 'https://i.pinimg.com/1200x/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg',
+      verifyEmailCode: 'user-ganteng',
     }
+  ]
+
+  await prisma.user.createMany({
+    data: userAccount
   })
 
   const products = [
@@ -48,7 +63,7 @@ async function main() {
       productName: '8 TINY HOLES - LOGO IMPACT',
       description: 'The Logo Impact T-shirt combines simplicity with sophistication. Featuring a minimalist logo and crafted from high-quality cotton, this shirt offers a soft, premium feel and effortless style. Perfect for a laid-back look or layered with your favorite jacket.',
       stock: 100,
-      price: 100,
+      price: 56,
       category: 'T-shirt',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
@@ -70,7 +85,7 @@ async function main() {
       productName: '8 TINY HOLES - BURN',
       description: 'Turn up the heat with the Burn T-shirt. Featuring a striking design and made from breathable cotton, this shirt is perfect for those who love to stand out. With its bold graphic and comfortable fit, its the ideal piece for adding a little fire to your wardrobe.',
       stock: 120,
-      price: 100,
+      price: 49,
       category: 'Jacket',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
@@ -81,7 +96,7 @@ async function main() {
       productName: '8 TINY HOLES - PARTIAL',
       description: 'The Partial T-shirt is all about combining comfort with style. Crafted from soft cotton, this shirt features a unique design that’s perfect for casual outings. Its versatility makes it a wardrobe staple, while the graphic adds a cool, modern edge to any outfit.',
       stock: 150,
-      price: 100,
+      price: 29,
       category: 'Jacket',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
@@ -92,23 +107,77 @@ async function main() {
       productName: '8 TINY HOLES - WILD SPIRIT',
       description: 'The Wild Spirit tee is for those who embrace the untamed. Featuring bold graphics and a rebellious vibe, this shirt is all about freedom and individuality. Crafted from soft cotton, it’s perfect for anyone who dares to stand out.',
       stock: 120,
-      price: 100,
+      price: 44,
       category: 'Jacket',
       size: ['S', 'M', 'L', 'XL'],
       productImage: [
         { imageUrl: 'https://www.orbisjkt.com/cdn/shop/products/Watchouttheworld-CREW-front_600x.jpg?v=1620589482' }
       ]
     },
-    // https://www.orbisjkt.com/cdn/shop/files/1_d7b38957-8123-4605-a195-592e7b7533a7_600x.jpg?v=1730288483
     {
       productName: '8 TINY HOLES - UNCHAINED',
       description: 'The Unchained jacket is for those who refuse to be held back. Featuring a sleek, modern design with subtle yet powerful detailing, this jacket embodies freedom. With its versatile style, it’s ready to elevate your streetwear game.',
       stock: 90,
       price: 180,
       category: 'Caps',
-      size: ['S', 'M', 'L', 'XL'],
+      size: ['ALL SIZE'],
       productImage: [
         { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/1_d7b38957-8123-4605-a195-592e7b7533a7_600x.jpg?v=1730288483' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - SCORPIONS',
+      description: 'The Unchained jacket is for those who refuse to be held back. Featuring a sleek, modern design with subtle yet powerful detailing, this jacket embodies freedom. With its versatile style, it’s ready to elevate your streetwear game.',
+      stock: 90,
+      price: 55,
+      category: 'Accessories',
+      size: ['ALL SIZE'],
+      productImage: [
+        { imageUrl: 'https://zodiacjakarta.com/cdn/shop/files/ZODIAC_PAM_FLATLAY-53_1024x1024@2x.png?v=1731675759' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - TOTEBAG BLACK',
+      description: 'The Unchained jacket is for those who refuse to be held back. Featuring a sleek, modern design with subtle yet powerful detailing, this jacket embodies freedom. With its versatile style, it’s ready to elevate your streetwear game.',
+      stock: 90,
+      price: 39,
+      category: 'Accessories',
+      size: ['ALL SIZE'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-23_41b4c99f-6ed2-4047-a7a5-c24e19c5c881_600x.jpg?v=1714278415' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - BLACK GUN',
+      description: 'The Unchained jacket is for those who refuse to be held back. Featuring a sleek, modern design with subtle yet powerful detailing, this jacket embodies freedom. With its versatile style, it’s ready to elevate your streetwear game.',
+      stock: 90,
+      price: 33,
+      category: 'Jacket',
+      size: ['S', 'M', 'L', 'XL'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize2copythis24-05_600x.jpg?v=1712149477' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - GOLDEN TRIANGLE',
+      description: 'The Unchained jacket is for those who refuse to be held back. Featuring a sleek, modern design with subtle yet powerful detailing, this jacket embodies freedom. With its versatile style, it’s ready to elevate your streetwear game.',
+      stock: 150,
+      price: 88,
+      category: 'Caps',
+      size: ['ALL SIZE'],
+      productImage: [
+        { imageUrl: 'https://zodiacjakarta.com/cdn/shop/files/5_f2f3cc6c-b6ab-4cf9-9ec6-1e61c0aa4201_1024x1024@2x.png?v=1710060200' }
+      ]
+    },
+    {
+      productName: '8 TINY HOLES - CLIFFS',
+      description: 'The Unchained jacket is for those who refuse to be held back. Featuring a sleek, modern design with subtle yet powerful detailing, this jacket embodies freedom. With its versatile style, it’s ready to elevate your streetwear game.',
+      stock: 150,
+      price: 76,
+      category: 'Caps',
+      size: ['ALL SIZE'],
+      productImage: [
+        { imageUrl: 'https://www.orbisjkt.com/cdn/shop/files/Resize-09_f40a70cc-b175-4eac-8b42-1dcf72a34a6e_600x.jpg?v=1714734746' }
       ]
     },
   ];
@@ -123,7 +192,7 @@ async function main() {
           create: productImage
         },
         sizeChart: {
-          create: size.map((s)=> {
+          create: size.map((s) => {
             return {
               size: s
             }

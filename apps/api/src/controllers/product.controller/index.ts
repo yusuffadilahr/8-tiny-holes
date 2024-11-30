@@ -113,7 +113,7 @@ export const getDataProducts = async (req: Request, res: Response, next: NextFun
         } else if (sorted == 'sort_price_asc') {
             dataProducts = filteredProducts?.sort((a: any, b: any) => a?.price - b?.price)
         } else {
-            dataProducts = filteredProducts?.sort((a: any, b: any) => a?.createdAt - b?.createdAt)
+            dataProducts = filteredProducts?.sort((a: any, b: any) => b?.createdAt - a?.createdAt)
         }
 
         res.status(200).json({
@@ -236,6 +236,14 @@ export const productNewest = async (req: Request, res: Response, next: NextFunct
             data: findProducts
         })
 
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const productBestSeller =async(req: Request, res: Response, next: NextFunction) => {
+    try {
+        
     } catch (error) {
         next(error)
     }

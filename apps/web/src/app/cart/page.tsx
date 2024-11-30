@@ -7,7 +7,6 @@ import { FaTrash } from "react-icons/fa";
 export default function Page() {
     const { getCart, handleDelete, handleIncrementData, handleDecrementData, totalPrice, totalQuantity } = useCartHooks()
 
-    console.log(getCart, "<<< cek dah")
     return (
         <main className={`w-full ${getCart?.length > 1 ? 'h-fit' : 'lg:h-[80vh]'} py-5 flex bg-black gap-2 px-2`}>
             <section className="w-full h-fit space-y-4">
@@ -18,6 +17,7 @@ export default function Page() {
                     <div key={i} className="w-full flex items-center justify-between h-fit bg-white rounded-lg py-5 px-10">
                         <div className="w-44 h-44">
                             <Image
+                                loading='lazy'
                                 width={500}
                                 height={500}
                                 src={item?.imageUrl}
