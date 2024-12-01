@@ -6,9 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -41,7 +41,7 @@ enum RoleUser {
 model Product {
   id          String @id @default(uuid())
   productName String
-  description String
+  description String @db.LongText
   stock       Int
   price       Int
   category    String
@@ -94,4 +94,15 @@ model CartProduct {
   deletedAt DateTime?
 
   @@map("cartProduct")
+}
+
+model Category {
+  id       Int    @id @default(autoincrement())
+  category String
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("category")
 }

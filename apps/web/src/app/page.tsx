@@ -86,7 +86,7 @@ export default function Home() {
       <section className='w-full flex flex-col justify-center items-center h-fit px-4 bg-black'>
         <div className='w-full flex flex-col justify-center items-center py-5 rounded-xl bg-white'>
           <h1 className='z-10 font-bold'>N E W - R E L E A S E</h1>
-          <div className='grid grid-cols-2 lg:grid-cols-4 w-full overflow-hidden'>
+          <div className='grid grid-cols-2 lg:grid-cols-4 w-full overflow-hidden px-2'>
             {newestProducts?.map((item: any, i: any) => (
               <Link href={`/products/${item?.id}-16320-${item?.productName.toLowerCase()}`} key={i}>
                 <CardProduct

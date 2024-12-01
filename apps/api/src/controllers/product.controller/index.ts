@@ -22,9 +22,7 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
                 category,
                 sizeChart: {
                     create: size?.map((s: any) => {
-                        return {
-                            size: s
-                        }
+                        return { size: s }
                     })
                 }
             }
@@ -78,8 +76,8 @@ export const getDataProducts = async (req: Request, res: Response, next: NextFun
                 },
                 where: {
                     OR: [
-                        { productName: { contains: searchValue as string, mode: "insensitive" } },
-                        { category: { contains: searchValue as string, mode: "insensitive" } }
+                        { productName: { contains: searchValue as string } },
+                        { category: { contains: searchValue as string } }
                     ]
                 }
             })
@@ -90,7 +88,7 @@ export const getDataProducts = async (req: Request, res: Response, next: NextFun
                 include: {
                     productImage: true
                 },
-                where: { category: { contains: categoryValue as string, mode: "insensitive" } }
+                where: { category: { contains: categoryValue as string } }
             })
 
         } else {
@@ -152,7 +150,9 @@ export const getDataProductsById = async (req: Request, res: Response, next: Nex
 
 export const addCartProduct = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { userId, qty, price, productId, size } = req.body
+        const { userId, authorizationRole, qty, price, productId, size } = req.body
+
+        if (authorizationRole != 'USER') throw { msg: 'Anda adalah admin, hanya role user yang dapat melakukan transaksi', status: 400 }
 
         const findCart = await prisma.cartProduct.findFirst({
             where: {
@@ -241,9 +241,9 @@ export const productNewest = async (req: Request, res: Response, next: NextFunct
     }
 }
 
-export const productBestSeller =async(req: Request, res: Response, next: NextFunction) => {
+export const productBestSeller = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        
+
     } catch (error) {
         next(error)
     }
