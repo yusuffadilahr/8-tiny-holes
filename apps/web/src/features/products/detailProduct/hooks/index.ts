@@ -3,6 +3,7 @@
 import { updateCart } from '@/redux/slice/authSlice'
 import { instance } from '@/utils/axios.instance'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,8 +11,9 @@ import { useDispatch, useSelector } from 'react-redux'
 export const useDetailProductHooks = ({ params }: any) => {
     const [getSize, setGetSize] = useState('')
     const dispatch = useDispatch()
+    const router = useRouter()
     const token = useSelector((state: any) => state.auth.user.token)
-    console.log(token)
+
     const { detail } = params
     const productId = detail?.split('-16320-')[0]
 
@@ -44,7 +46,11 @@ export const useDetailProductHooks = ({ params }: any) => {
             console.log(res)
         },
         onError: (err: any) => {
-            toast.error(err?.response?.data?.message)
+            if(err?.response?.data?.message == 'Harap login terlebih dahulu') {
+                router.push('/login')
+            } else {
+                toast.error(err?.response?.data?.message)
+            }
         }
     })
 
@@ -55,8 +61,6 @@ export const useDetailProductHooks = ({ params }: any) => {
         { "size": "XL", "chest": "105 cm", "length": "75 cm" },
         { "size": "XXL", "chest": "110 cm", "length": "80 cm" }
     ]
-
-    console.log(params, 'dari hooks nih brayyyyy')
 
     return {
         setGetSize, getSize, token, detail, selectedSize, handleAddCart, isPending, dataProduct, sizeChart

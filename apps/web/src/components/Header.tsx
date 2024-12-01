@@ -16,6 +16,7 @@ export const Header = () => {
   const token = useSelector((state: any) => state?.auth?.user?.token)
   const cartUser = useSelector((state: any) => state?.auth?.user?.cart)
   const emailUser = useSelector((state: any) => state?.auth?.user?.email)
+  const role = useSelector((state: any) => state?.auth?.user?.role)
   const [getCategory, setGetCategory] = useState(false)
   const [isMenuUser, setIsMenuUser] = useState(false)
   const { setCategorySearch } = useProductsHooks()
@@ -88,32 +89,33 @@ export const Header = () => {
   return (
     <nav className={`${pathname.startsWith('/dashboard') ? 'hidden' : 'flex'} flex-col w-full h-fit bg-black`}>
       <section className='w-full relative justify-between items-center flex h-20 bg-black'>
-        {/* <Link href='/' className="text-white">8 T I N Y H O L E S</Link> */}
-        <Link href='/' className="w-fit h-7 lg:h-9 px-5">
-          <Image
-            src={'/images/logos.jpeg'}
-            alt="logo"
-            width={700}
-            height={700}
-            className="w-fit h-7 lg:h-9 object-cover"
-          />
+        <Link href='/' className="w-fit h-7 lg:h-12 px-5">
+          <video autoPlay loop playsInline muted className='w-fit h-12'>
+            <source src='/videos/3dd.mp4' type='video/mp4' />
+          </video>
         </Link>
         <div className="flex items-center gap-2 text-xs px-5">
-          <div className="flex items-center gap-10 text-xs px-3">
-            <Link href='/newest' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/newest') ? 'border-b border-white' : ''}`}>N E W E S T</Link>
-            <Link href='/products' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/products') ? 'border-b border-white' : ''}`}>P R O D U C T S</Link>
-            <span onMouseEnter={handleClickCategory} className={`cursor-pointer text-white hover:border-b hover:border-white`}>C A T E G O R Y</span>
-            <Link href='/lookbook' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/lookbook') ? 'border-b border-white' : ''}`}>L O O K B O O K</Link>
-            <Link href='/contact' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/contact') ? 'border-b border-white' : ''}`}>C O N T A C T</Link>
-            <Link href='/about' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/about') ? 'border-b border-white' : ''}`}>A B O U T</Link>
-            <Link href='/cart' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/cart') ? 'border-b border-white' : ''}`}>C A R T ({cartUser?.length > 0 ? cartUser?.length : '0'})</Link>
-          </div>
+          {role != 'ADMIN' ?
+            <div className="flex items-center gap-10 text-xs px-3">
+              <Link href='/newest' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/newest') ? 'border-b border-white' : ''}`}>N E W E S T</Link>
+              <Link href='/products' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/products') ? 'border-b border-white' : ''}`}>P R O D U C T S</Link>
+              <span onMouseEnter={handleClickCategory} className={`cursor-pointer text-white hover:border-b hover:border-white`}>C A T E G O R Y</span>
+              <Link href='/lookbook' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/lookbook') ? 'border-b border-white' : ''}`}>L O O K B O O K</Link>
+              <Link href='/contact' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/contact') ? 'border-b border-white' : ''}`}>C O N T A C T</Link>
+              <Link href='/about' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/about') ? 'border-b border-white' : ''}`}>A B O U T</Link>
+              <Link href='/cart' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/cart') ? 'border-b border-white' : ''}`}>C A R T ({cartUser?.length > 0 ? cartUser?.length : '0'})</Link>
+            </div>
+            : <div className="flex items-center gap-10 text-xs px-3">
+              <Link href='/dashboard' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/dashboard') ? 'border-b border-white' : ''}`}>D A S H B O A R D</Link>
+              <Link href='/products' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/products') ? 'border-b border-white' : ''}`}>P R O D U C T S</Link>
+              <span onMouseEnter={handleClickCategory} className={`cursor-pointer text-white hover:border-b hover:border-white`}>C A T E G O R Y</span>
+              <Link href='/lookbook' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/lookbook') ? 'border-b border-white' : ''}`}>L O O K B O O K</Link>
+              <Link href='/contact' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/contact') ? 'border-b border-white' : ''}`}>C O N T A C T</Link>
+              <Link href='/about' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/about') ? 'border-b border-white' : ''}`}>A B O U T</Link>
+            </div>}
           <span onMouseEnter={handleMenuUser} className="text-white cursor-pointer">
             <FaUser />
           </span>
-          {/* {!!token ? <button onClick={handleLogout} className="text-white hover:border-b hover:border-white">
-            <FaUser />
-          </button> : ''} */}
         </div>
         {isMenuUser ?
           <div onMouseLeave={handleMenuUser} className="absolute bottom-[-200px] text-white text-xs w-2/12 right-0 justify-center flex h-52 z-20">
@@ -165,30 +167,11 @@ export const Header = () => {
                     A C C E S S O R I E S
                   </span>
                 </span>
-
-                {/* <span onClick={() => handleCategorySearch('jacket')}>
-                  <span className="hover:border-b hover:border-white">J A C K E T</span></span>
-                <span onClick={() => handleCategorySearch('caps')}>
-                  <span className="hover:border-b hover:border-white">C A P S</span></span>
-                <span onClick={() => handleCategorySearch('pants')}>
-                  <span className="hover:border-b hover:border-white">P A N T S</span></span>
-                <span onClick={() => handleCategorySearch('accessories')}>
-                  <span className="hover:border-b hover:border-white">A C C E S S O R I E S</span></span> */}
               </div>
             </div>
           </div>
           : ''}
       </section>
-
-      {/* <section className='w-full items-center justify-end flex gap-10 h-6 text-[10px] bg-black pb-4 px-5'>
-        <Link href='/newest' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/newest') ? 'border-b border-white' : ''}`}>N E W E S T</Link>
-        <Link href='/category' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/category') ? 'border-b border-white' : ''}`}>C A T E G O R Y</Link>
-        <Link href='/lookbook' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/lookbook') ? 'border-b border-white' : ''}`}>L O O K B O O K</Link>
-        <Link href='/contact' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/contact') ? 'border-b border-white' : ''}`}>C O N T A C T</Link>
-        <Link href='/about' className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/about') ? 'border-b border-white' : ''}`}>A B O U T</Link>
-        <Link href={`${!!token ? '/profile' : '/login'}`} className={`text-white hover:border-b hover:border-white ${pathname.startsWith('/profile') || pathname.startsWith('/login') ? 'border-b border-white' : ''}`}>{!!token ? 'P R O F I L E' : 'A C C O U N T'}</Link>
-      </section> */}
-
     </nav>
   );
 };

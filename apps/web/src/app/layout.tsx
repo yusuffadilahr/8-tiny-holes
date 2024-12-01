@@ -11,8 +11,8 @@ import AuthProviders from '@/providers/authProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Easy Shopper Site | Beranda',
-  description: 'Welcome to Easy Shopper',
+  title: '8 TINY HOLES Site | Beranda',
+  description: 'Welcome to 8 TINY HOLES',
 };
 
 export default function RootLayout({

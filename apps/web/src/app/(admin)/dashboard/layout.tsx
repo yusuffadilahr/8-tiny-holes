@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaCartArrowDown, FaDashcube, FaIceCream, FaMoneyBillWave, FaSignOutAlt, FaUserCheck } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaCartArrowDown, FaDashcube, FaHouseDamage, FaIceCream, FaMoneyBillWave, FaSignOutAlt, FaUserCheck } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
@@ -98,10 +98,10 @@ export default function Layout({ children }: { children: ReactNode }) {
                         <FaDashcube /> Dashboard</Link>
                     <Link href='/dashboard/products' className={`w-full flex ${pathname == '/dashboard/products' ? 'bg-white text-black' : 'hover:bg-white'} items-center gap-2 hover:text-black py-2 rounded-full px-4`}>
                         <FaCartArrowDown /> Products</Link>
-                    <Link href='/dashboard/category' className={`w-full flex ${pathname == '/dashboard/category' ? 'bg-white text-black' : 'hover:bg-white'} items-center gap-2 hover:text-black py-2 rounded-full px-4`}>
-                        <FaIceCream /> Category</Link>
                     <Link href='/dashboard/transaction' className={`w-full flex ${pathname == '/dashboard/transaction' ? 'bg-white text-black' : 'hover:bg-white'} items-center gap-2 hover:text-black py-2 rounded-full px-4`}>
                         <FaMoneyBillWave /> Transaction</Link>
+                    <Link href='/' className={`w-full flex ${pathname == '/dashboard/category' ? 'bg-white text-black' : 'hover:bg-white'} items-center gap-2 hover:text-black py-2 rounded-full px-4`}>
+                        <FaHouseDamage /> Home Page</Link>
                 </div>
                 <h1 className="px-4 text-sm text-neutral-600 py-2">Account</h1>
                 <div className="w-full h-full flex flex-col gap-4">
