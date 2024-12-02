@@ -1,4 +1,4 @@
-import { addCartProduct, createProduct, deleteDataCart, getDataProducts, getDataProductsById, productNewest } from "@/controllers/product.controller";
+import { addCartProduct, createProduct, deleteDataCart, deleteProduct, getDataProducts, getDataProductsById, productNewest } from "@/controllers/product.controller";
 import { roleCheck } from "@/middlewares/roleCheck";
 import { uploader } from "@/middlewares/uploader";
 import { createProductValidation } from "@/middlewares/validator/createProductValidation";
@@ -11,6 +11,7 @@ productRouter.get('/detail/:id', getDataProductsById)
 productRouter.post('/product-new', createProductValidation, tokenValidation, roleCheck, uploader, createProduct)
 productRouter.post('/add-to-cart', tokenValidation, addCartProduct)
 productRouter.delete('/detail/:id', tokenValidation, deleteDataCart)
+productRouter.delete('/product/:id', tokenValidation, roleCheck, deleteProduct)
 productRouter.get('/newest', productNewest)
 
 export default productRouter

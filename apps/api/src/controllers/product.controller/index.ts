@@ -248,3 +248,27 @@ export const productBestSeller = async (req: Request, res: Response, next: NextF
         next(error)
     }
 }
+
+export const deleteProduct = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params
+
+        const findProduct = await prisma.product.findFirst({
+            where: { id }
+        })
+
+        if (!findProduct) throw { msg: 'Product sudah dihapus dan tidak ada', status: 404 }
+
+        await prisma.product.delete({
+            where: { id }
+        })
+
+        res.status(200).json({
+            error: false,
+            message: 'Berhasil menghapus data',
+            data: {}
+        })
+    } catch (error) {
+        next(error)
+    }
+}

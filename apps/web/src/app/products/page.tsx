@@ -25,12 +25,11 @@ export default function Page() {
                         <option value="t-shirt">T-Shirt</option>
                         <option value="jacket">Jacket</option>
                         <option value="caps">Caps</option>
-                        <option value="pants">Pants</option>
-                        <option value="shoes">Shoes</option>
                         <option value="accessories">Accessories</option>
                         <option value="">Reset</option>
                     </select>
                     <input onChange={(e) => debounce(e.target.value)} type="text" className="border-b focus:outline-none px-2" placeholder="S E A R C H" />
+                    <h1 className="text-neutral-400 flex items-center">{dataProducts?.length ? dataProducts?.length : '0'} P R O D U C T S</h1>
                 </div>
                 {dataProducts?.length > 0 ? (
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 w-full gap-4 px-2 md:px-10">

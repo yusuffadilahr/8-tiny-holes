@@ -6,7 +6,7 @@ import { loginValidation } from "@/features/login/schemas";
 import { useLoginHooks } from "@/features/login/hooks";
 
 export default function Page() {
-    const { handleSubmitLogin, isPending, handleVisiblePassword, isVisible } = useLoginHooks()
+    const { handleSubmitLogin, isPending, handleVisiblePassword, isVisible, isDisabled } = useLoginHooks()
 
     return (
         <main className="lg:w-full h-[100svh] md:h-[100mvh] lg:h-[100lvh] bg-white flex justify-center items-center lg:px-20 px-5 lg:py-10 py-2">
@@ -16,16 +16,15 @@ export default function Page() {
                     <div className="w-full h-full flex justify-center items-center">
                         <Formik
                             initialValues={{
-                                email: '', /* *template: bomude@polkaroad.net */
-                                password: '', /* *template: @Tes123123 */
+                                email: '',
+                                password: '',
                             }}
-                            // validationSchema={loginValidation}
+                            validationSchema={loginValidation}
                             onSubmit={(values: any) => {
                                 handleSubmitLogin({
                                     email: values?.email,
                                     password: values?.password
                                 })
-                                console.log(values)
                             }}
                         >
                             <Form className="w-full h-full flex flex-col justify-center items-center lg:px-10 px-2">
@@ -44,7 +43,7 @@ export default function Page() {
                                         }
                                     </span>
                                 </div>
-                                <button disabled={isPending} className="disabled:bg-neutral-900 w-full py-2 text-sm mt-2 border bg-black text-white hover:bg-neutral-900" type="submit">S U B M I T</button>
+                                <button disabled={isPending || isDisabled} className="disabled:bg-neutral-900 w-full py-2 text-sm mt-2 border bg-black text-white hover:bg-neutral-900" type="submit">S U B M I T</button>
                             </Form>
                         </Formik>
                     </div>

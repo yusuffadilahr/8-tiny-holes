@@ -13,7 +13,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button";
-import { FaPlus } from "react-icons/fa";
+import { FaPen, FaPenFancy, FaPlus, FaTrash } from "react-icons/fa";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
@@ -60,8 +60,26 @@ export default function Page() {
         }
     })
 
-    const paginatedData = dataProducts?.slice((currentPage - 1) * entriesPerPage, entriesPerPage)
+    const { mutate: handleDeleteProduct } = useMutation({
+        mutationFn: async (id) => {
+            return await instance.delete(`/product/product/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        },
+        onSuccess: (res) => {
+            console.log(res)
+            toast.success(res?.data?.message)
+            refetch()
+        },
+        onError: (err:any) => {
+            toast.error(err?.response?.data?.message)
+            console.log(err)
+        }
+    })
 
+    const paginatedData = dataProducts?.slice((currentPage - 1) * entriesPerPage, entriesPerPage)
     const sizeData = ['S', 'M', 'L', 'XL', 'ALL SIZE']
 
     return (
@@ -228,7 +246,7 @@ export default function Page() {
                             </DialogContent>
                         </Dialog>
                     </div>
-                    <table className="w-full text-center">
+                    <table className="w-full text-center text-sm">
                         <thead>
                             <tr>
                                 <th className="py-2 border text-white opacity-100">No</th>
@@ -245,7 +263,10 @@ export default function Page() {
                                     <td className="py-2 border text-white opacity-100">{item?.productName}</td>
                                     <td className="py-2 border text-white opacity-100">{item?.stock}</td>
                                     <td className="py-2 border text-white opacity-100">${item?.price},00</td>
-                                    <td className="py-2 border text-white opacity-100"></td>
+                                    <td className="py-2 border text-white opacity-100 flex gap-2 justify-center">
+                                        <button onClick={()=> handleDeleteProduct(item?.id)} className="py-2 px-3 rounded-xl bg-red-600 hover:bg-red-500"><FaTrash /></button>
+                                        <button className="py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-500"><FaPen /></button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
