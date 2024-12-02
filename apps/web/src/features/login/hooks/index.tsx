@@ -19,6 +19,7 @@ const secret_key = process.env.NEXT_PUBLIC_CRYPTO_SECRET_KEY as string
 export const useLoginHooks = () => {
     const dispatch = useDispatch()
     const [isVisible, setIsVisible] = useState<boolean>(false)
+    const [isDisabled, setIsDisabled] = useState<boolean>(false)
     const router = useRouter()
     const { mutate: handleSubmitLogin, isPending } = useMutation({
         mutationFn: async ({ email, password }: ILoginBody) => {
@@ -35,6 +36,8 @@ export const useLoginHooks = () => {
             Cookies.set('_toksis', res?.data?.data?.token, { expires: 1 })
             Cookies.set('_roled', roleUser, { expires: 1 })
 
+            setIsDisabled(true)
+            
             res?.data?.data?.role != 'ADMIN' ? window.location.href = '/' : window.location.href = '/dashboard'
         },
         onError: (err: any) => {
@@ -42,7 +45,7 @@ export const useLoginHooks = () => {
             console.log(err)
         }
     })
-
+    
     const handleVisiblePassword = () => {
         setIsVisible(!isVisible)
         setTimeout(() => {
@@ -51,6 +54,6 @@ export const useLoginHooks = () => {
     }
 
     return {
-        handleSubmitLogin, isPending, handleVisiblePassword, isVisible, setIsVisible
+        handleSubmitLogin, isPending, handleVisiblePassword, isVisible, setIsVisible, isDisabled, setIsDisabled
     }
 }

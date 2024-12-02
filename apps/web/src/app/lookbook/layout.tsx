@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { ReactNode } from "react";
 
 export const metadata: Metadata = {
-     title: '8 TINY HOLES Site | Autentikasi User',
+     title: '8 TINY HOLES Site | Lookbook',
      description: 'Welcome to 8 TINY HOLES',
  }
  
